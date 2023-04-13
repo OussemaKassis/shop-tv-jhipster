@@ -1,0 +1,165 @@
+
+entity User {
+    firstName String,
+    lastName String,
+    email String,
+    password String,
+    avatarUrl String,
+    status String,
+    role Role
+}
+
+enum Role {
+    ADMIN, CLIENT, COMPANY_ADMIN, COMPANY_EMPLOYER
+}
+
+entity Company {
+    companyName String,
+    companyType String,
+    companyDescription String,
+    companyPicture String,
+    companyCreationDate Instant,
+    companyLocationAddress String,
+    companyActivityDomaine String
+}
+
+entity AfterEffectsTemplate {
+    templateName String,
+    templateDuration String,
+    templateDescription String,
+    templateRating Instant,
+    templateActive Boolean,
+    templateType String,
+    templateExpectedSize String,
+    templateCount String,
+    templateVisibleFor String,
+    ratio String,
+    previewUrl String
+}
+
+entity AfterEffectsTemplateAssets {
+	assetName String,
+	assetType String,
+}
+
+entity Category {
+	categoryName String,
+    ratio String
+}
+
+entity Video {
+    videoName String,
+    videoDuration String,
+    videoSize String,
+    videoCategory String,
+    videoRating String,
+    videoStatus String,
+    videoPublicUrl String,
+    videoPath String,
+    videoVisibleFor String
+}
+
+entity Client {
+    phoneNumber String,
+    gender String,
+    dateOfBirth Instant,
+    currentPlanOffer String,
+    job Job
+}
+
+enum Job {
+    DESIGNER, UI_UX, MARKETING, RETAIL, VIDEO_EDITOR, DEVELOPER
+}
+
+entity Address {
+    country String,
+    city String,
+    zipCode Instant
+}
+
+entity Plan {
+    planName String,
+    price String
+}
+
+entity PlanOptions {
+    aeTemplateLimit String,
+    videoSubmittionLimit String,
+    emojis Boolean,
+    storage String
+}
+
+entity PurchaseHistory {
+    plan String,
+    purchaseDate Instant
+}
+
+relationship OneToOne {
+	Client{Plan} to Plan,
+    Client{address} to Address
+    User{Client} to Client,
+    Plan{PlanOptions} to PlanOptions
+}
+
+relationship OneToMany {
+	Client to PurchaseHistory{client},
+    Company to User{company},
+    Company to AfterEffectsTemplate{company},
+    AfterEffectsTemplate to Video{afterEffectsTemplate},
+    User to Video{user},
+    Category to AfterEffectsTemplate{category}
+    AfterEffectsTemplateAssets to AfterEffectsTemplate
+}
+
+relationship OneToOne {
+	Country{region} to Region
+}
+
+relationship OneToOne {
+	Location{country} to Country
+}
+
+relationship OneToOne {
+	Department{location} to Location
+}
+
+relationship ManyToMany {
+	Job{task(title)} to Task{job}
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	Employee to Job{employee},
+	/**
+	* A relationship
+	*/
+	Department to
+	/**
+	* Another side of the same relationship
+	*/
+	Employee{department}
+}
+
+relationship ManyToOne {
+	Employee{manager} to Employee
+}
+
+// defining multiple oneToOne relationships
+relationship OneToOne {
+	JobHistory{job} to Job,
+	JobHistory{department} to Department,
+	JobHistory{employee} to Employee
+}
+
+// Set pagination options
+paginate JobHistory, Employee with infinite-scroll
+paginate Job with pagination
+
+// Use Data Transfer Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl except Employee, Job
+
+// Set an angular suffix
+// angularSuffix * with mySuffix
