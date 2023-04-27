@@ -1,0 +1,32 @@
+{
+  "applications": "*",
+  "changelogDate": "20230413102852",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "plan_options",
+  "fields": [
+    {
+      "fieldName": "aeTemplateLimit",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "videoSubmittionLimit",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "emojis",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "storage",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "PlanOptions",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [],
+  "service": "serviceImpl"
+}

@@ -1,0 +1,52 @@
+{
+  "applications": "*",
+  "changelogDate": "20230413102843",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "app_user",
+  "fields": [
+    {
+      "fieldName": "avatarUrl",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "status",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "role",
+      "fieldType": "Role",
+      "fieldValues": "ADMIN,CLIENT,COMPANY_ADMIN,COMPANY_EMPLOYER"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "AppUser",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "video",
+      "otherEntityRelationshipName": "user",
+      "relationshipName": "video",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "company",
+      "otherEntityRelationshipName": "appUser",
+      "relationshipName": "company",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "id": true,
+      "otherEntityField": "login",
+      "otherEntityName": "user",
+      "otherEntityRelationshipName": "appUser",
+      "ownerSide": true,
+      "relationshipName": "user",
+      "relationshipType": "one-to-one",
+      "relationshipValidateRules": []
+    }
+  ],
+  "service": "serviceImpl"
+}

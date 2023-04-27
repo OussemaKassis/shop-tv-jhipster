@@ -1,0 +1,161 @@
+<div>
+  <h2 id="page-heading" data-cy="VideoHeading">
+    <span jhiTranslate="shopTvJhipsterApp.video.home.title">Videos</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="shopTvJhipsterApp.video.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-video"
+        [routerLink]="['/video/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="shopTvJhipsterApp.video.home.createLabel"> Create a new Video </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="videos?.length === 0">
+    <span jhiTranslate="shopTvJhipsterApp.video.home.notFound">No Videos found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="videos && videos.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="videoName">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.video.videoName">Video Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="videoDuration">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.video.videoDuration">Video Duration</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="videoSize">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.video.videoSize">Video Size</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="videoCategory">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.video.videoCategory">Video Category</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="videoRating">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.video.videoRating">Video Rating</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="videoStatus">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.video.videoStatus">Video Status</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="videoPublicUrl">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.video.videoPublicUrl">Video Public Url</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="videoPath">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.video.videoPath">Video Path</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="videoVisibleFor">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.video.videoVisibleFor">Video Visible For</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="afterEffectsTemplate.id">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.video.afterEffectsTemplate">After Effects Template</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="user.id">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.video.user">User</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody
+        infinite-scroll
+        (scrolled)="loadPage(page + 1)"
+        [infiniteScrollDisabled]="page - 1 >= links['last']"
+        [infiniteScrollDistance]="0"
+      >
+        <tr *ngFor="let video of videos; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/video', video.id, 'view']">{{ video.id }}</a>
+          </td>
+          <td>{{ video.videoName }}</td>
+          <td>{{ video.videoDuration }}</td>
+          <td>{{ video.videoSize }}</td>
+          <td>{{ video.videoCategory }}</td>
+          <td>{{ video.videoRating }}</td>
+          <td>{{ video.videoStatus }}</td>
+          <td>{{ video.videoPublicUrl }}</td>
+          <td>{{ video.videoPath }}</td>
+          <td>{{ video.videoVisibleFor }}</td>
+          <td>
+            <div *ngIf="video.afterEffectsTemplate">
+              <a [routerLink]="['/after-effects-template', video.afterEffectsTemplate.id, 'view']">{{ video.afterEffectsTemplate.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="video.user">
+              <a [routerLink]="['/app-user', video.user.id, 'view']">{{ video.user.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/video', video.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/video', video.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(video)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

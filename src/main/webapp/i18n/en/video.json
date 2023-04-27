@@ -1,0 +1,34 @@
+{
+  "shopTvJhipsterApp": {
+    "video": {
+      "home": {
+        "title": "Videos",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Video",
+        "createOrEditLabel": "Create or edit a Video",
+        "notFound": "No Videos found"
+      },
+      "created": "A new Video is created with identifier {{ param }}",
+      "updated": "A Video is updated with identifier {{ param }}",
+      "deleted": "A Video is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Video {{ id }}?"
+      },
+      "detail": {
+        "title": "Video"
+      },
+      "id": "ID",
+      "videoName": "Video Name",
+      "videoDuration": "Video Duration",
+      "videoSize": "Video Size",
+      "videoCategory": "Video Category",
+      "videoRating": "Video Rating",
+      "videoStatus": "Video Status",
+      "videoPublicUrl": "Video Public Url",
+      "videoPath": "Video Path",
+      "videoVisibleFor": "Video Visible For",
+      "afterEffectsTemplate": "After Effects Template",
+      "user": "User"
+    }
+  }
+}

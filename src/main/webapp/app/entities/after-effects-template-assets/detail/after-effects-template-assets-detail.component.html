@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="afterEffectsTemplateAssets">
+      <h2 data-cy="afterEffectsTemplateAssetsDetailsHeading">
+        <span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplateAssets.detail.title">After Effects Template Assets</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ afterEffectsTemplateAssets.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplateAssets.assetName">Asset Name</span></dt>
+        <dd>
+          <span>{{ afterEffectsTemplateAssets.assetName }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplateAssets.assetType">Asset Type</span></dt>
+        <dd>
+          <span>{{ afterEffectsTemplateAssets.assetType }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button
+        type="button"
+        [routerLink]="['/after-effects-template-assets', afterEffectsTemplateAssets.id, 'edit']"
+        class="btn btn-primary"
+      >
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

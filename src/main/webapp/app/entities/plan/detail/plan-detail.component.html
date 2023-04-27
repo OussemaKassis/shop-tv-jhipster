@@ -1,0 +1,42 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="plan">
+      <h2 data-cy="planDetailsHeading"><span jhiTranslate="shopTvJhipsterApp.plan.detail.title">Plan</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ plan.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.plan.planName">Plan Name</span></dt>
+        <dd>
+          <span>{{ plan.planName }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.plan.price">Price</span></dt>
+        <dd>
+          <span>{{ plan.price }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.plan.planOptions">Plan Options</span></dt>
+        <dd>
+          <div *ngIf="plan.planOptions">
+            <a [routerLink]="['/plan-options', plan.planOptions.id, 'view']">{{ plan.planOptions.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/plan', plan.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

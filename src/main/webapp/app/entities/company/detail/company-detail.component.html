@@ -1,0 +1,56 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="company">
+      <h2 data-cy="companyDetailsHeading"><span jhiTranslate="shopTvJhipsterApp.company.detail.title">Company</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ company.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.company.companyName">Company Name</span></dt>
+        <dd>
+          <span>{{ company.companyName }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.company.companyType">Company Type</span></dt>
+        <dd>
+          <span>{{ company.companyType }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.company.companyDescription">Company Description</span></dt>
+        <dd>
+          <span>{{ company.companyDescription }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.company.companyPicture">Company Picture</span></dt>
+        <dd>
+          <span>{{ company.companyPicture }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.company.companyCreationDate">Company Creation Date</span></dt>
+        <dd>
+          <span>{{ company.companyCreationDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.company.companyLocationAddress">Company Location Address</span></dt>
+        <dd>
+          <span>{{ company.companyLocationAddress }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.company.companyActivityDomaine">Company Activity Domaine</span></dt>
+        <dd>
+          <span>{{ company.companyActivityDomaine }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/company', company.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

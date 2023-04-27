@@ -1,0 +1,94 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="afterEffectsTemplate">
+      <h2 data-cy="afterEffectsTemplateDetailsHeading">
+        <span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.detail.title">After Effects Template</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ afterEffectsTemplate.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.templateName">Template Name</span></dt>
+        <dd>
+          <span>{{ afterEffectsTemplate.templateName }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.templateDuration">Template Duration</span></dt>
+        <dd>
+          <span>{{ afterEffectsTemplate.templateDuration }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.templateDescription">Template Description</span></dt>
+        <dd>
+          <span>{{ afterEffectsTemplate.templateDescription }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.templateRating">Template Rating</span></dt>
+        <dd>
+          <span>{{ afterEffectsTemplate.templateRating | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.templateActive">Template Active</span></dt>
+        <dd>
+          <span>{{ afterEffectsTemplate.templateActive }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.templateType">Template Type</span></dt>
+        <dd>
+          <span>{{ afterEffectsTemplate.templateType }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.templateExpectedSize">Template Expected Size</span></dt>
+        <dd>
+          <span>{{ afterEffectsTemplate.templateExpectedSize }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.templateCount">Template Count</span></dt>
+        <dd>
+          <span>{{ afterEffectsTemplate.templateCount }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.templateVisibleFor">Template Visible For</span></dt>
+        <dd>
+          <span>{{ afterEffectsTemplate.templateVisibleFor }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.ratio">Ratio</span></dt>
+        <dd>
+          <span>{{ afterEffectsTemplate.ratio }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.previewUrl">Preview Url</span></dt>
+        <dd>
+          <span>{{ afterEffectsTemplate.previewUrl }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.company">Company</span></dt>
+        <dd>
+          <div *ngIf="afterEffectsTemplate.company">
+            <a [routerLink]="['/company', afterEffectsTemplate.company.id, 'view']">{{ afterEffectsTemplate.company.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.category">Category</span></dt>
+        <dd>
+          <div *ngIf="afterEffectsTemplate.category">
+            <a [routerLink]="['/category', afterEffectsTemplate.category.id, 'view']">{{ afterEffectsTemplate.category.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.afterEffectsTemplateAssets">After Effects Template Assets</span></dt>
+        <dd>
+          <div *ngIf="afterEffectsTemplate.afterEffectsTemplateAssets">
+            <a [routerLink]="['/after-effects-template-assets', afterEffectsTemplate.afterEffectsTemplateAssets.id, 'view']">{{
+              afterEffectsTemplate.afterEffectsTemplateAssets.id
+            }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/after-effects-template', afterEffectsTemplate.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

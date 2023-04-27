@@ -1,0 +1,26 @@
+{
+  "shopTvJhipsterApp": {
+    "purchaseHistory": {
+      "home": {
+        "title": "Purchase Histories",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Purchase History",
+        "createOrEditLabel": "Create or edit a Purchase History",
+        "notFound": "No Purchase Histories found"
+      },
+      "created": "A new Purchase History is created with identifier {{ param }}",
+      "updated": "A Purchase History is updated with identifier {{ param }}",
+      "deleted": "A Purchase History is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Purchase History {{ id }}?"
+      },
+      "detail": {
+        "title": "Purchase History"
+      },
+      "id": "ID",
+      "plan": "Plan",
+      "purchaseDate": "Purchase Date",
+      "client": "Client"
+    }
+  }
+}

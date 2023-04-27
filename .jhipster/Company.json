@@ -1,0 +1,57 @@
+{
+  "applications": "*",
+  "changelogDate": "20230413102844",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "company",
+  "fields": [
+    {
+      "fieldName": "companyName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "companyType",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "companyDescription",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "companyPicture",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "companyCreationDate",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "companyLocationAddress",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "companyActivityDomaine",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Company",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "appUser",
+      "otherEntityRelationshipName": "company",
+      "relationshipName": "appUser",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "afterEffectsTemplate",
+      "otherEntityRelationshipName": "company",
+      "relationshipName": "afterEffectsTemplate",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

@@ -1,0 +1,131 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-company-heading" data-cy="CompanyCreateUpdateHeading" jhiTranslate="shopTvJhipsterApp.company.home.createOrEditLabel">
+        Create or edit a Company
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="shopTvJhipsterApp.company.companyName" for="field_companyName">Company Name</label>
+          <input
+            type="text"
+            class="form-control"
+            name="companyName"
+            id="field_companyName"
+            data-cy="companyName"
+            formControlName="companyName"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="shopTvJhipsterApp.company.companyType" for="field_companyType">Company Type</label>
+          <input
+            type="text"
+            class="form-control"
+            name="companyType"
+            id="field_companyType"
+            data-cy="companyType"
+            formControlName="companyType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="shopTvJhipsterApp.company.companyDescription" for="field_companyDescription"
+            >Company Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="companyDescription"
+            id="field_companyDescription"
+            data-cy="companyDescription"
+            formControlName="companyDescription"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="shopTvJhipsterApp.company.companyPicture" for="field_companyPicture"
+            >Company Picture</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="companyPicture"
+            id="field_companyPicture"
+            data-cy="companyPicture"
+            formControlName="companyPicture"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="shopTvJhipsterApp.company.companyCreationDate" for="field_companyCreationDate"
+            >Company Creation Date</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_companyCreationDate"
+              data-cy="companyCreationDate"
+              type="datetime-local"
+              class="form-control"
+              name="companyCreationDate"
+              formControlName="companyCreationDate"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="shopTvJhipsterApp.company.companyLocationAddress" for="field_companyLocationAddress"
+            >Company Location Address</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="companyLocationAddress"
+            id="field_companyLocationAddress"
+            data-cy="companyLocationAddress"
+            formControlName="companyLocationAddress"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="shopTvJhipsterApp.company.companyActivityDomaine" for="field_companyActivityDomaine"
+            >Company Activity Domaine</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="companyActivityDomaine"
+            id="field_companyActivityDomaine"
+            data-cy="companyActivityDomaine"
+            formControlName="companyActivityDomaine"
+          />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

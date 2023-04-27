@@ -1,0 +1,27 @@
+{
+  "shopTvJhipsterApp": {
+    "planOptions": {
+      "home": {
+        "title": "Plan Options",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Plan Options",
+        "createOrEditLabel": "Create or edit a Plan Options",
+        "notFound": "No Plan Options found"
+      },
+      "created": "A new Plan Options is created with identifier {{ param }}",
+      "updated": "A Plan Options is updated with identifier {{ param }}",
+      "deleted": "A Plan Options is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Plan Options {{ id }}?"
+      },
+      "detail": {
+        "title": "Plan Options"
+      },
+      "id": "ID",
+      "aeTemplateLimit": "Ae Template Limit",
+      "videoSubmittionLimit": "Video Submittion Limit",
+      "emojis": "Emojis",
+      "storage": "Storage"
+    }
+  }
+}

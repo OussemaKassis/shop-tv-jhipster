@@ -1,0 +1,31 @@
+{
+  "applications": "*",
+  "changelogDate": "20230413102853",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "purchase_history",
+  "fields": [
+    {
+      "fieldName": "plan",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "purchaseDate",
+      "fieldType": "Instant"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "PurchaseHistory",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "client",
+      "otherEntityRelationshipName": "purchaseHistory",
+      "relationshipName": "client",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

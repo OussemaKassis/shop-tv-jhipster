@@ -1,0 +1,65 @@
+{
+  "applications": "*",
+  "changelogDate": "20230413102848",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "video",
+  "fields": [
+    {
+      "fieldName": "videoName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "videoDuration",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "videoSize",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "videoCategory",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "videoRating",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "videoStatus",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "videoPublicUrl",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "videoPath",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "videoVisibleFor",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Video",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "afterEffectsTemplate",
+      "otherEntityRelationshipName": "video",
+      "relationshipName": "afterEffectsTemplate",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "appUser",
+      "otherEntityRelationshipName": "video",
+      "relationshipName": "user",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

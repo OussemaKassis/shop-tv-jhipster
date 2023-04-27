@@ -1,0 +1,31 @@
+{
+  "applications": "*",
+  "changelogDate": "20230413102851",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "plan",
+  "fields": [
+    {
+      "fieldName": "planName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "price",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Plan",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "planOptions",
+      "ownerSide": true,
+      "relationshipName": "planOptions",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

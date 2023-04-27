@@ -1,0 +1,114 @@
+<div>
+  <h2 id="page-heading" data-cy="PlanOptionsHeading">
+    <span jhiTranslate="shopTvJhipsterApp.planOptions.home.title">Plan Options</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="shopTvJhipsterApp.planOptions.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-plan-options"
+        [routerLink]="['/plan-options/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="shopTvJhipsterApp.planOptions.home.createLabel"> Create a new Plan Options </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="planOptions?.length === 0">
+    <span jhiTranslate="shopTvJhipsterApp.planOptions.home.notFound">No Plan Options found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="planOptions && planOptions.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="aeTemplateLimit">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.planOptions.aeTemplateLimit">Ae Template Limit</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="videoSubmittionLimit">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.planOptions.videoSubmittionLimit">Video Submittion Limit</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="emojis">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.planOptions.emojis">Emojis</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="storage">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.planOptions.storage">Storage</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody
+        infinite-scroll
+        (scrolled)="loadPage(page + 1)"
+        [infiniteScrollDisabled]="page - 1 >= links['last']"
+        [infiniteScrollDistance]="0"
+      >
+        <tr *ngFor="let planOptions of planOptions; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/plan-options', planOptions.id, 'view']">{{ planOptions.id }}</a>
+          </td>
+          <td>{{ planOptions.aeTemplateLimit }}</td>
+          <td>{{ planOptions.videoSubmittionLimit }}</td>
+          <td>{{ planOptions.emojis }}</td>
+          <td>{{ planOptions.storage }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/plan-options', planOptions.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/plan-options', planOptions.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(planOptions)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

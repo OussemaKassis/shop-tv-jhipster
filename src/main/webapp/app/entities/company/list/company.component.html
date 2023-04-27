@@ -1,0 +1,135 @@
+<div>
+  <h2 id="page-heading" data-cy="CompanyHeading">
+    <span jhiTranslate="shopTvJhipsterApp.company.home.title">Companies</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="shopTvJhipsterApp.company.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-company"
+        [routerLink]="['/company/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="shopTvJhipsterApp.company.home.createLabel"> Create a new Company </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="companies?.length === 0">
+    <span jhiTranslate="shopTvJhipsterApp.company.home.notFound">No Companies found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="companies && companies.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="companyName">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.company.companyName">Company Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="companyType">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.company.companyType">Company Type</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="companyDescription">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.company.companyDescription">Company Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="companyPicture">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.company.companyPicture">Company Picture</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="companyCreationDate">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.company.companyCreationDate">Company Creation Date</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="companyLocationAddress">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.company.companyLocationAddress">Company Location Address</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="companyActivityDomaine">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.company.companyActivityDomaine">Company Activity Domaine</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody
+        infinite-scroll
+        (scrolled)="loadPage(page + 1)"
+        [infiniteScrollDisabled]="page - 1 >= links['last']"
+        [infiniteScrollDistance]="0"
+      >
+        <tr *ngFor="let company of companies; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/company', company.id, 'view']">{{ company.id }}</a>
+          </td>
+          <td>{{ company.companyName }}</td>
+          <td>{{ company.companyType }}</td>
+          <td>{{ company.companyDescription }}</td>
+          <td>{{ company.companyPicture }}</td>
+          <td>{{ company.companyCreationDate | formatMediumDatetime }}</td>
+          <td>{{ company.companyLocationAddress }}</td>
+          <td>{{ company.companyActivityDomaine }}</td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/company', company.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/company', company.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(company)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

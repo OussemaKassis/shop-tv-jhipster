@@ -1,0 +1,44 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="purchaseHistory">
+      <h2 data-cy="purchaseHistoryDetailsHeading">
+        <span jhiTranslate="shopTvJhipsterApp.purchaseHistory.detail.title">Purchase History</span>
+      </h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ purchaseHistory.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.purchaseHistory.plan">Plan</span></dt>
+        <dd>
+          <span>{{ purchaseHistory.plan }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.purchaseHistory.purchaseDate">Purchase Date</span></dt>
+        <dd>
+          <span>{{ purchaseHistory.purchaseDate | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.purchaseHistory.client">Client</span></dt>
+        <dd>
+          <div *ngIf="purchaseHistory.client">
+            <a [routerLink]="['/client', purchaseHistory.client.id, 'view']">{{ purchaseHistory.client.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/purchase-history', purchaseHistory.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

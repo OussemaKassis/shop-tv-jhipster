@@ -1,0 +1,66 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="client">
+      <h2 data-cy="clientDetailsHeading"><span jhiTranslate="shopTvJhipsterApp.client.detail.title">Client</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ client.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.client.phoneNumber">Phone Number</span></dt>
+        <dd>
+          <span>{{ client.phoneNumber }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.client.gender">Gender</span></dt>
+        <dd>
+          <span>{{ client.gender }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.client.dateOfBirth">Date Of Birth</span></dt>
+        <dd>
+          <span>{{ client.dateOfBirth | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.client.currentPlanOffer">Current Plan Offer</span></dt>
+        <dd>
+          <span>{{ client.currentPlanOffer }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.client.job">Job</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'shopTvJhipsterApp.Job.' + client.job }}">{{ client.job }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.client.plan">Plan</span></dt>
+        <dd>
+          <div *ngIf="client.plan">
+            <a [routerLink]="['/plan', client.plan.id, 'view']">{{ client.plan.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.client.address">Address</span></dt>
+        <dd>
+          <div *ngIf="client.address">
+            <a [routerLink]="['/address', client.address.id, 'view']">{{ client.address.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.client.appUser">App User</span></dt>
+        <dd>
+          <div *ngIf="client.appUser">
+            <a [routerLink]="['/app-user', client.appUser.id, 'view']">{{ client.appUser.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/client', client.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

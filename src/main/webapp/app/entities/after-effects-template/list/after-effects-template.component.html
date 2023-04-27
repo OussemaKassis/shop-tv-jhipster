@@ -1,0 +1,198 @@
+<div>
+  <h2 id="page-heading" data-cy="AfterEffectsTemplateHeading">
+    <span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.home.title">After Effects Templates</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-after-effects-template"
+        [routerLink]="['/after-effects-template/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.home.createLabel"> Create a new After Effects Template </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="afterEffectsTemplates?.length === 0">
+    <span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.home.notFound">No After Effects Templates found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="afterEffectsTemplates && afterEffectsTemplates.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="templateName">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.templateName">Template Name</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="templateDuration">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.templateDuration">Template Duration</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="templateDescription">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.templateDescription">Template Description</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="templateRating">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.templateRating">Template Rating</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="templateActive">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.templateActive">Template Active</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="templateType">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.templateType">Template Type</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="templateExpectedSize">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.templateExpectedSize">Template Expected Size</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="templateCount">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.templateCount">Template Count</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="templateVisibleFor">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.templateVisibleFor">Template Visible For</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="ratio">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.ratio">Ratio</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="previewUrl">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.previewUrl">Preview Url</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="company.id">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.company">Company</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="category.id">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.category">Category</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="afterEffectsTemplateAssets.id">
+            <div class="d-flex">
+              <span jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.afterEffectsTemplateAssets">After Effects Template Assets</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody
+        infinite-scroll
+        (scrolled)="loadPage(page + 1)"
+        [infiniteScrollDisabled]="page - 1 >= links['last']"
+        [infiniteScrollDistance]="0"
+      >
+        <tr *ngFor="let afterEffectsTemplate of afterEffectsTemplates; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/after-effects-template', afterEffectsTemplate.id, 'view']">{{ afterEffectsTemplate.id }}</a>
+          </td>
+          <td>{{ afterEffectsTemplate.templateName }}</td>
+          <td>{{ afterEffectsTemplate.templateDuration }}</td>
+          <td>{{ afterEffectsTemplate.templateDescription }}</td>
+          <td>{{ afterEffectsTemplate.templateRating | formatMediumDatetime }}</td>
+          <td>{{ afterEffectsTemplate.templateActive }}</td>
+          <td>{{ afterEffectsTemplate.templateType }}</td>
+          <td>{{ afterEffectsTemplate.templateExpectedSize }}</td>
+          <td>{{ afterEffectsTemplate.templateCount }}</td>
+          <td>{{ afterEffectsTemplate.templateVisibleFor }}</td>
+          <td>{{ afterEffectsTemplate.ratio }}</td>
+          <td>{{ afterEffectsTemplate.previewUrl }}</td>
+          <td>
+            <div *ngIf="afterEffectsTemplate.company">
+              <a [routerLink]="['/company', afterEffectsTemplate.company.id, 'view']">{{ afterEffectsTemplate.company.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="afterEffectsTemplate.category">
+              <a [routerLink]="['/category', afterEffectsTemplate.category.id, 'view']">{{ afterEffectsTemplate.category.id }}</a>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="afterEffectsTemplate.afterEffectsTemplateAssets">
+              <a [routerLink]="['/after-effects-template-assets', afterEffectsTemplate.afterEffectsTemplateAssets.id, 'view']">{{
+                afterEffectsTemplate.afterEffectsTemplateAssets.id
+              }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/after-effects-template', afterEffectsTemplate.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/after-effects-template', afterEffectsTemplate.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(afterEffectsTemplate)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,11 @@
+{
+  "shopTvJhipsterApp": {
+    "Role": {
+      "null": "",
+      "ADMIN": "ADMIN",
+      "CLIENT": "CLIENT",
+      "COMPANY_ADMIN": "COMPANY_ADMIN",
+      "COMPANY_EMPLOYER": "COMPANY_EMPLOYER"
+    }
+  }
+}

@@ -1,0 +1,76 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="video">
+      <h2 data-cy="videoDetailsHeading"><span jhiTranslate="shopTvJhipsterApp.video.detail.title">Video</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ video.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.video.videoName">Video Name</span></dt>
+        <dd>
+          <span>{{ video.videoName }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.video.videoDuration">Video Duration</span></dt>
+        <dd>
+          <span>{{ video.videoDuration }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.video.videoSize">Video Size</span></dt>
+        <dd>
+          <span>{{ video.videoSize }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.video.videoCategory">Video Category</span></dt>
+        <dd>
+          <span>{{ video.videoCategory }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.video.videoRating">Video Rating</span></dt>
+        <dd>
+          <span>{{ video.videoRating }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.video.videoStatus">Video Status</span></dt>
+        <dd>
+          <span>{{ video.videoStatus }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.video.videoPublicUrl">Video Public Url</span></dt>
+        <dd>
+          <span>{{ video.videoPublicUrl }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.video.videoPath">Video Path</span></dt>
+        <dd>
+          <span>{{ video.videoPath }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.video.videoVisibleFor">Video Visible For</span></dt>
+        <dd>
+          <span>{{ video.videoVisibleFor }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.video.afterEffectsTemplate">After Effects Template</span></dt>
+        <dd>
+          <div *ngIf="video.afterEffectsTemplate">
+            <a [routerLink]="['/after-effects-template', video.afterEffectsTemplate.id, 'view']">{{ video.afterEffectsTemplate.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.video.user">User</span></dt>
+        <dd>
+          <div *ngIf="video.user">
+            <a [routerLink]="['/app-user', video.user.id, 'view']">{{ video.user.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/video', video.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

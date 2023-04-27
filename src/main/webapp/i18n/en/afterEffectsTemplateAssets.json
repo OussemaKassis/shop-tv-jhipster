@@ -1,0 +1,26 @@
+{
+  "shopTvJhipsterApp": {
+    "afterEffectsTemplateAssets": {
+      "home": {
+        "title": "After Effects Template Assets",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new After Effects Template Assets",
+        "createOrEditLabel": "Create or edit a After Effects Template Assets",
+        "notFound": "No After Effects Template Assets found"
+      },
+      "created": "A new After Effects Template Assets is created with identifier {{ param }}",
+      "updated": "A After Effects Template Assets is updated with identifier {{ param }}",
+      "deleted": "A After Effects Template Assets is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete After Effects Template Assets {{ id }}?"
+      },
+      "detail": {
+        "title": "After Effects Template Assets"
+      },
+      "id": "ID",
+      "assetName": "Asset Name",
+      "assetType": "Asset Type",
+      "afterEffectsTemplate": "After Effects Template"
+    }
+  }
+}

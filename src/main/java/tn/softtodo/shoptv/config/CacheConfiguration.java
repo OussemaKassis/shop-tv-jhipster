@@ -51,6 +51,24 @@ public class CacheConfiguration {
             createCache(cm, tn.softtodo.shoptv.domain.User.class.getName());
             createCache(cm, tn.softtodo.shoptv.domain.Authority.class.getName());
             createCache(cm, tn.softtodo.shoptv.domain.User.class.getName() + ".authorities");
+            createCache(cm, tn.softtodo.shoptv.domain.AppUser.class.getName());
+            createCache(cm, tn.softtodo.shoptv.domain.AppUser.class.getName() + ".videos");
+            createCache(cm, tn.softtodo.shoptv.domain.Company.class.getName());
+            createCache(cm, tn.softtodo.shoptv.domain.Company.class.getName() + ".appUsers");
+            createCache(cm, tn.softtodo.shoptv.domain.Company.class.getName() + ".afterEffectsTemplates");
+            createCache(cm, tn.softtodo.shoptv.domain.AfterEffectsTemplate.class.getName());
+            createCache(cm, tn.softtodo.shoptv.domain.AfterEffectsTemplate.class.getName() + ".videos");
+            createCache(cm, tn.softtodo.shoptv.domain.AfterEffectsTemplateAssets.class.getName());
+            createCache(cm, tn.softtodo.shoptv.domain.AfterEffectsTemplateAssets.class.getName() + ".afterEffectsTemplates");
+            createCache(cm, tn.softtodo.shoptv.domain.Category.class.getName());
+            createCache(cm, tn.softtodo.shoptv.domain.Category.class.getName() + ".afterEffectsTemplates");
+            createCache(cm, tn.softtodo.shoptv.domain.Video.class.getName());
+            createCache(cm, tn.softtodo.shoptv.domain.Client.class.getName());
+            createCache(cm, tn.softtodo.shoptv.domain.Client.class.getName() + ".purchaseHistories");
+            createCache(cm, tn.softtodo.shoptv.domain.Address.class.getName());
+            createCache(cm, tn.softtodo.shoptv.domain.Plan.class.getName());
+            createCache(cm, tn.softtodo.shoptv.domain.PlanOptions.class.getName());
+            createCache(cm, tn.softtodo.shoptv.domain.PurchaseHistory.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

@@ -1,0 +1,247 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-after-effects-template-heading"
+        data-cy="AfterEffectsTemplateCreateUpdateHeading"
+        jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.home.createOrEditLabel"
+      >
+        Create or edit a After Effects Template
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.templateName" for="field_templateName"
+            >Template Name</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="templateName"
+            id="field_templateName"
+            data-cy="templateName"
+            formControlName="templateName"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.templateDuration" for="field_templateDuration"
+            >Template Duration</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="templateDuration"
+            id="field_templateDuration"
+            data-cy="templateDuration"
+            formControlName="templateDuration"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.templateDescription"
+            for="field_templateDescription"
+            >Template Description</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="templateDescription"
+            id="field_templateDescription"
+            data-cy="templateDescription"
+            formControlName="templateDescription"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.templateRating" for="field_templateRating"
+            >Template Rating</label
+          >
+          <div class="d-flex">
+            <input
+              id="field_templateRating"
+              data-cy="templateRating"
+              type="datetime-local"
+              class="form-control"
+              name="templateRating"
+              formControlName="templateRating"
+              placeholder="YYYY-MM-DD HH:mm"
+            />
+          </div>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.templateActive" for="field_templateActive"
+            >Template Active</label
+          >
+          <input
+            type="checkbox"
+            class="form-check"
+            name="templateActive"
+            id="field_templateActive"
+            data-cy="templateActive"
+            formControlName="templateActive"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.templateType" for="field_templateType"
+            >Template Type</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="templateType"
+            id="field_templateType"
+            data-cy="templateType"
+            formControlName="templateType"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.templateExpectedSize"
+            for="field_templateExpectedSize"
+            >Template Expected Size</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="templateExpectedSize"
+            id="field_templateExpectedSize"
+            data-cy="templateExpectedSize"
+            formControlName="templateExpectedSize"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.templateCount" for="field_templateCount"
+            >Template Count</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="templateCount"
+            id="field_templateCount"
+            data-cy="templateCount"
+            formControlName="templateCount"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.templateVisibleFor" for="field_templateVisibleFor"
+            >Template Visible For</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="templateVisibleFor"
+            id="field_templateVisibleFor"
+            data-cy="templateVisibleFor"
+            formControlName="templateVisibleFor"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.ratio" for="field_ratio">Ratio</label>
+          <input type="text" class="form-control" name="ratio" id="field_ratio" data-cy="ratio" formControlName="ratio" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.previewUrl" for="field_previewUrl"
+            >Preview Url</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="previewUrl"
+            id="field_previewUrl"
+            data-cy="previewUrl"
+            formControlName="previewUrl"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.company" for="field_company">Company</label>
+          <select
+            class="form-control"
+            id="field_company"
+            data-cy="company"
+            name="company"
+            formControlName="company"
+            [compareWith]="compareCompany"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="companyOption" *ngFor="let companyOption of companiesSharedCollection">{{ companyOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.category" for="field_category">Category</label>
+          <select
+            class="form-control"
+            id="field_category"
+            data-cy="category"
+            name="category"
+            formControlName="category"
+            [compareWith]="compareCategory"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="categoryOption" *ngFor="let categoryOption of categoriesSharedCollection">{{ categoryOption.id }}</option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label
+            class="form-label"
+            jhiTranslate="shopTvJhipsterApp.afterEffectsTemplate.afterEffectsTemplateAssets"
+            for="field_afterEffectsTemplateAssets"
+            >After Effects Template Assets</label
+          >
+          <select
+            class="form-control"
+            id="field_afterEffectsTemplateAssets"
+            data-cy="afterEffectsTemplateAssets"
+            name="afterEffectsTemplateAssets"
+            formControlName="afterEffectsTemplateAssets"
+            [compareWith]="compareAfterEffectsTemplateAssets"
+          >
+            <option [ngValue]="null"></option>
+            <option
+              [ngValue]="afterEffectsTemplateAssetsOption"
+              *ngFor="let afterEffectsTemplateAssetsOption of afterEffectsTemplateAssetsSharedCollection"
+            >
+              {{ afterEffectsTemplateAssetsOption.id }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

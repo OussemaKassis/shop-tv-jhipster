@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="appUser">
+      <h2 data-cy="appUserDetailsHeading"><span jhiTranslate="shopTvJhipsterApp.appUser.detail.title">App User</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ appUser.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.appUser.avatarUrl">Avatar Url</span></dt>
+        <dd>
+          <span>{{ appUser.avatarUrl }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.appUser.status">Status</span></dt>
+        <dd>
+          <span>{{ appUser.status }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.appUser.role">Role</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'shopTvJhipsterApp.Role.' + appUser.role }}">{{ appUser.role }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.appUser.company">Company</span></dt>
+        <dd>
+          <div *ngIf="appUser.company">
+            <a [routerLink]="['/company', appUser.company.id, 'view']">{{ appUser.company.id }}</a>
+          </div>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.appUser.user">User</span></dt>
+        <dd>
+          <span>{{ appUser.user?.login }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/app-user', appUser.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

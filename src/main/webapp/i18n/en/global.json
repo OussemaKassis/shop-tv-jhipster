@@ -7,6 +7,17 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entities",
+        "appUser": "App User",
+        "company": "Company",
+        "afterEffectsTemplate": "After Effects Template",
+        "afterEffectsTemplateAssets": "After Effects Template Assets",
+        "category": "Category",
+        "video": "Video",
+        "client": "Client",
+        "address": "Address",
+        "plan": "Plan",
+        "planOptions": "Plan Options",
+        "purchaseHistory": "Purchase History",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

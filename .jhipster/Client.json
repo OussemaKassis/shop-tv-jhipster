@@ -1,0 +1,65 @@
+{
+  "applications": "*",
+  "changelogDate": "20230413102849",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "client",
+  "fields": [
+    {
+      "fieldName": "phoneNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "gender",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateOfBirth",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "currentPlanOffer",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "job",
+      "fieldType": "Job",
+      "fieldValues": "DESIGNER,UI_UX,MARKETING,RETAIL,VIDEO_EDITOR,DEVELOPER"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Client",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "plan",
+      "ownerSide": true,
+      "relationshipName": "plan",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "address",
+      "ownerSide": true,
+      "relationshipName": "address",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "purchaseHistory",
+      "otherEntityRelationshipName": "client",
+      "relationshipName": "purchaseHistory",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "id": true,
+      "otherEntityField": "id",
+      "otherEntityName": "appUser",
+      "otherEntityRelationshipName": "client",
+      "ownerSide": true,
+      "relationshipName": "appUser",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

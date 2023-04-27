@@ -1,0 +1,44 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="planOptions">
+      <h2 data-cy="planOptionsDetailsHeading"><span jhiTranslate="shopTvJhipsterApp.planOptions.detail.title">Plan Options</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ planOptions.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.planOptions.aeTemplateLimit">Ae Template Limit</span></dt>
+        <dd>
+          <span>{{ planOptions.aeTemplateLimit }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.planOptions.videoSubmittionLimit">Video Submittion Limit</span></dt>
+        <dd>
+          <span>{{ planOptions.videoSubmittionLimit }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.planOptions.emojis">Emojis</span></dt>
+        <dd>
+          <span>{{ planOptions.emojis }}</span>
+        </dd>
+        <dt><span jhiTranslate="shopTvJhipsterApp.planOptions.storage">Storage</span></dt>
+        <dd>
+          <span>{{ planOptions.storage }}</span>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/plan-options', planOptions.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

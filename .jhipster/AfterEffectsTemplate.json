@@ -1,0 +1,85 @@
+{
+  "applications": "*",
+  "changelogDate": "20230413102845",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "after_effects_template",
+  "fields": [
+    {
+      "fieldName": "templateName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "templateDuration",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "templateDescription",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "templateRating",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "templateActive",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "templateType",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "templateExpectedSize",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "templateCount",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "templateVisibleFor",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "ratio",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "previewUrl",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "AfterEffectsTemplate",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "video",
+      "otherEntityRelationshipName": "afterEffectsTemplate",
+      "relationshipName": "video",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "company",
+      "otherEntityRelationshipName": "afterEffectsTemplate",
+      "relationshipName": "company",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "category",
+      "otherEntityRelationshipName": "afterEffectsTemplate",
+      "relationshipName": "category",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "afterEffectsTemplateAssets",
+      "otherEntityRelationshipName": "afterEffectsTemplate",
+      "relationshipName": "afterEffectsTemplateAssets",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

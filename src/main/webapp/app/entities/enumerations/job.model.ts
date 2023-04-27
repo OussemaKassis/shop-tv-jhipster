@@ -1,0 +1,13 @@
+export enum Job {
+  DESIGNER = 'DESIGNER',
+
+  UI_UX = 'UI_UX',
+
+  MARKETING = 'MARKETING',
+
+  RETAIL = 'RETAIL',
+
+  VIDEO_EDITOR = 'VIDEO_EDITOR',
+
+  DEVELOPER = 'DEVELOPER',
+}

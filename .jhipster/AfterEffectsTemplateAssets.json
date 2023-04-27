@@ -1,0 +1,31 @@
+{
+  "applications": "*",
+  "changelogDate": "20230413102846",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "after_effects_template_assets",
+  "fields": [
+    {
+      "fieldName": "assetName",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "assetType",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "AfterEffectsTemplateAssets",
+  "pagination": "infinite-scroll",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "afterEffectsTemplate",
+      "otherEntityRelationshipName": "afterEffectsTemplateAssets",
+      "relationshipName": "afterEffectsTemplate",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "service": "serviceImpl"
+}

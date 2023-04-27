@@ -1,0 +1,152 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-video-heading" data-cy="VideoCreateUpdateHeading" jhiTranslate="shopTvJhipsterApp.video.home.createOrEditLabel">
+        Create or edit a Video
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="row mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="shopTvJhipsterApp.video.videoName" for="field_videoName">Video Name</label>
+          <input type="text" class="form-control" name="videoName" id="field_videoName" data-cy="videoName" formControlName="videoName" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="shopTvJhipsterApp.video.videoDuration" for="field_videoDuration">Video Duration</label>
+          <input
+            type="text"
+            class="form-control"
+            name="videoDuration"
+            id="field_videoDuration"
+            data-cy="videoDuration"
+            formControlName="videoDuration"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="shopTvJhipsterApp.video.videoSize" for="field_videoSize">Video Size</label>
+          <input type="text" class="form-control" name="videoSize" id="field_videoSize" data-cy="videoSize" formControlName="videoSize" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="shopTvJhipsterApp.video.videoCategory" for="field_videoCategory">Video Category</label>
+          <input
+            type="text"
+            class="form-control"
+            name="videoCategory"
+            id="field_videoCategory"
+            data-cy="videoCategory"
+            formControlName="videoCategory"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="shopTvJhipsterApp.video.videoRating" for="field_videoRating">Video Rating</label>
+          <input
+            type="text"
+            class="form-control"
+            name="videoRating"
+            id="field_videoRating"
+            data-cy="videoRating"
+            formControlName="videoRating"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="shopTvJhipsterApp.video.videoStatus" for="field_videoStatus">Video Status</label>
+          <input
+            type="text"
+            class="form-control"
+            name="videoStatus"
+            id="field_videoStatus"
+            data-cy="videoStatus"
+            formControlName="videoStatus"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="shopTvJhipsterApp.video.videoPublicUrl" for="field_videoPublicUrl"
+            >Video Public Url</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="videoPublicUrl"
+            id="field_videoPublicUrl"
+            data-cy="videoPublicUrl"
+            formControlName="videoPublicUrl"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="shopTvJhipsterApp.video.videoPath" for="field_videoPath">Video Path</label>
+          <input type="text" class="form-control" name="videoPath" id="field_videoPath" data-cy="videoPath" formControlName="videoPath" />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="shopTvJhipsterApp.video.videoVisibleFor" for="field_videoVisibleFor"
+            >Video Visible For</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="videoVisibleFor"
+            id="field_videoVisibleFor"
+            data-cy="videoVisibleFor"
+            formControlName="videoVisibleFor"
+          />
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="shopTvJhipsterApp.video.afterEffectsTemplate" for="field_afterEffectsTemplate"
+            >After Effects Template</label
+          >
+          <select
+            class="form-control"
+            id="field_afterEffectsTemplate"
+            data-cy="afterEffectsTemplate"
+            name="afterEffectsTemplate"
+            formControlName="afterEffectsTemplate"
+            [compareWith]="compareAfterEffectsTemplate"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="afterEffectsTemplateOption" *ngFor="let afterEffectsTemplateOption of afterEffectsTemplatesSharedCollection">
+              {{ afterEffectsTemplateOption.id }}
+            </option>
+          </select>
+        </div>
+
+        <div class="row mb-3">
+          <label class="form-label" jhiTranslate="shopTvJhipsterApp.video.user" for="field_user">User</label>
+          <select class="form-control" id="field_user" data-cy="user" name="user" formControlName="user" [compareWith]="compareAppUser">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="appUserOption" *ngFor="let appUserOption of appUsersSharedCollection">{{ appUserOption.id }}</option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
