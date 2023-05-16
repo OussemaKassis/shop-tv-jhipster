@@ -1,5 +1,9 @@
 package tn.softtodo.shoptv.web.rest;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -8,6 +12,8 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -64,6 +70,48 @@ public class VideoResource {
             .created(new URI("/api/videos/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
             .body(result);
+    }
+
+    /**
+     * {@code POST  /videos} : execute command line nexrender.
+     *
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new video, or with status {@code 400 (Bad Request)} if the video has already an ID.
+     * @throws URISyntaxException if the Location URI syntax is incorrect.
+     */
+    @GetMapping("/execute-cli-nexrender")
+    public Object executeCliNexrender() throws URISyntaxException, JSONException, IOException, InterruptedException {
+        // log.debug("REST request to save Video : {}", video);
+        /*if (video.getId() != null) {
+            throw new BadRequestAlertException("A new video cannot already have an ID", ENTITY_NAME, "idexists");
+        }*/
+        //Video result = videoService.save(video);
+        /*return ResponseEntity
+            .created(new URI("/api/videos/" + result.getId()))
+            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+            .body(result);*/
+
+        final Process p = Runtime
+            .getRuntime()
+            .exec("cmd /c nexrender-cli-win64.exe --file main.json", null, new File("C:\\Users\\Oussema\\Desktop\\test"));
+
+        new Thread(
+            new Runnable() {
+                public void run() {
+                    BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
+                    String line = null;
+
+                    try {
+                        while ((line = input.readLine()) != null) System.out.println(line);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        )
+            .start();
+
+        p.waitFor();
+        return "done";
     }
 
     /**
