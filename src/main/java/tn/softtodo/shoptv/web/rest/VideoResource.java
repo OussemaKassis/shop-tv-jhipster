@@ -1,25 +1,31 @@
 package tn.softtodo.shoptv.web.rest;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.configurationprocessor.json.JSONException;
-import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
@@ -32,6 +38,7 @@ import tn.softtodo.shoptv.web.rest.errors.BadRequestAlertException;
 /**
  * REST controller for managing {@link tn.softtodo.shoptv.domain.Video}.
  */
+@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping("/api")
 public class VideoResource {
@@ -78,8 +85,44 @@ public class VideoResource {
      * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new video, or with status {@code 400 (Bad Request)} if the video has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-    @GetMapping("/execute-cli-nexrender")
-    public Object executeCliNexrender() throws URISyntaxException, JSONException, IOException, InterruptedException {
+    @CrossOrigin(origins = "http://localhost:8080")
+    @PostMapping("/execute-cli-nexrender")
+    public Object executeCliNexrender(@RequestBody Map<String, Object> json)
+        throws URISyntaxException, JSONException, IOException, InterruptedException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        try {
+            // Specify the file path and name
+            String filePath = "C:\\Users\\Oussema\\Desktop\\test\\mainAuto.json";
+            String content = objectMapper.writeValueAsString(json);
+
+            // Create a File object
+            File file = new File(filePath);
+
+            // Create the file
+            boolean created = file.createNewFile();
+
+            // Write content to the file
+            objectMapper.writeValue(file, content);
+
+            String newContent = Files.readString(Path.of(filePath));
+
+            newContent.replace("\\", "");
+            StringBuilder sbStr = new StringBuilder(newContent);
+            sbStr.deleteCharAt(0);
+            sbStr.substring(0, sbStr.length() - 1);
+            sbStr.toString().replace("\\", "");
+            String modifiedContent = sbStr.toString().replace("\\", "");
+            modifiedContent.substring(0, modifiedContent.length() - 1);
+            StringBuilder sb = new StringBuilder(modifiedContent);
+            Files.write(Paths.get(filePath), sb.toString().getBytes(StandardCharsets.UTF_8));
+            if (created) {
+                System.out.println("File created successfully.");
+            } else {
+                System.out.println("File already exists.");
+            }
+        } catch (IOException e) {
+            System.out.println("Error occurred while creating the file: " + e.getMessage());
+        }
         // log.debug("REST request to save Video : {}", video);
         /*if (video.getId() != null) {
             throw new BadRequestAlertException("A new video cannot already have an ID", ENTITY_NAME, "idexists");
@@ -92,7 +135,7 @@ public class VideoResource {
 
         final Process p = Runtime
             .getRuntime()
-            .exec("cmd /c nexrender-cli-win64.exe --file main.json", null, new File("C:\\Users\\Oussema\\Desktop\\test"));
+            .exec("cmd /c nexrender-cli-win64.exe --file mainAuto.json", null, new File("C:\\Users\\Oussema\\Desktop\\test"));
 
         new Thread(
             new Runnable() {
@@ -112,6 +155,35 @@ public class VideoResource {
 
         p.waitFor();
         return "done";
+    }
+
+    @PostMapping("/upload")
+    public String uploadFile(@RequestParam("file") MultipartFile file) {
+        return "done";
+        // Check if the file is empty
+        //return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while uploading the file");
+        /*if (file.isEmpty()) {
+            return ResponseEntity.badRequest().body("File is empty");
+        }
+
+        try {
+            // Save the file to a specific location
+            String filePath = "/" + file.getOriginalFilename();
+            file.transferTo(new File(filePath));
+
+            // Return the file path
+            return ResponseEntity.ok(filePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error occurred while uploading the file");
+        }*/
+    }
+
+    @PostMapping("/myendpoint")
+    public ResponseEntity<String> processObject(@RequestBody Map<String, Object> requestBody) {
+        String name = (String) requestBody.get("namge");
+
+        return ResponseEntity.ok("Object processed successfully " + name);
     }
 
     /**

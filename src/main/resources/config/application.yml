@@ -113,8 +113,19 @@ management:
         request:
           autotime:
             enabled: true
-
 spring:
+  mail:
+    username: 77061cd1ba0f0a
+    password: 28cbd1eba28901
+    host: sandbox.smtp.mailtrap.io
+    port: 2525
+    protocol: smtp
+    tls: true
+    properties.mail.smtp:
+      auth: true
+      starttls.enable: true
+      ssl.trust:
+
   application:
     name: shopTvJhipster
   profiles:

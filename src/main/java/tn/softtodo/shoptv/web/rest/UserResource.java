@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +16,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -22,9 +27,11 @@ import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
 import tn.softtodo.shoptv.config.Constants;
+import tn.softtodo.shoptv.domain.AppUser;
 import tn.softtodo.shoptv.domain.User;
 import tn.softtodo.shoptv.repository.UserRepository;
 import tn.softtodo.shoptv.security.AuthoritiesConstants;
+import tn.softtodo.shoptv.service.AppUserService;
 import tn.softtodo.shoptv.service.MailService;
 import tn.softtodo.shoptv.service.UserService;
 import tn.softtodo.shoptv.service.dto.AdminUserDTO;
@@ -83,12 +90,24 @@ public class UserResource {
 
     private final UserService userService;
 
+    private JavaMailSender javaMailSender;
+
+    private JavaMailSender mailSender;
+
+    private final AppUserService appUserService;
+
     private final UserRepository userRepository;
 
     private final MailService mailService;
 
-    public UserResource(UserService userService, UserRepository userRepository, MailService mailService) {
+    @Autowired
+    public void EmailService(JavaMailSender mailSender) {
+        this.mailSender = mailSender;
+    }
+
+    public UserResource(UserService userService, AppUserService appUserService, UserRepository userRepository, MailService mailService) {
         this.userService = userService;
+        this.appUserService = appUserService;
         this.userRepository = userRepository;
         this.mailService = mailService;
     }
@@ -119,6 +138,7 @@ public class UserResource {
             throw new EmailAlreadyUsedException();
         } else {
             User newUser = userService.createUser(userDTO);
+            // AppUser appUser = appUserService.save()
             mailService.sendCreationEmail(newUser);
             return ResponseEntity
                 .created(new URI("/api/admin/users/" + newUser.getLogin()))
@@ -189,6 +209,24 @@ public class UserResource {
     public ResponseEntity<AdminUserDTO> getUser(@PathVariable @Pattern(regexp = Constants.LOGIN_REGEX) String login) {
         log.debug("REST request to get User : {}", login);
         return ResponseUtil.wrapOrNotFound(userService.getUserWithAuthoritiesByLogin(login).map(AdminUserDTO::new));
+    }
+
+    @GetMapping("/verify")
+    public String sendVerificationMail() {
+        try {
+            // Creating a simple mail message
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setFrom("from@example.com");
+            message.setTo("joe@example.net");
+            message.setSubject("subject");
+            message.setText("text");
+            mailSender.send(message);
+
+            return "Mail Sent Successfully...";
+        } // Catch block to handle the exceptions
+        catch (Exception e) {
+            return e.getMessage();
+        }
     }
 
     /**
