@@ -20,6 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.configurationprocessor.json.JSONException;
+import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
@@ -87,25 +88,27 @@ public class VideoResource {
      */
     @CrossOrigin(origins = "http://localhost:8080")
     @PostMapping("/execute-cli-nexrender")
-    public Object executeCliNexrender(@RequestBody Map<String, Object> json)
+    public ResponseEntity<String> executeCliNexrender(@RequestBody Map<String, Object> json)
         throws URISyntaxException, JSONException, IOException, InterruptedException {
         ObjectMapper objectMapper = new ObjectMapper();
+        JSONObject jsonNew = new JSONObject(json);
+        // Access the output field
+        String output = jsonNew
+            .getJSONObject("actions")
+            .getJSONArray("postrender")
+            .getJSONObject(1) // Assuming you want the output from the second object in the postrender array
+            .getString("output");
         try {
             // Specify the file path and name
             String filePath = "C:\\Users\\Oussema\\Desktop\\test\\mainAuto.json";
             String content = objectMapper.writeValueAsString(json);
-
             // Create a File object
             File file = new File(filePath);
-
             // Create the file
             boolean created = file.createNewFile();
-
             // Write content to the file
             objectMapper.writeValue(file, content);
-
             String newContent = Files.readString(Path.of(filePath));
-
             newContent.replace("\\", "");
             StringBuilder sbStr = new StringBuilder(newContent);
             sbStr.deleteCharAt(0);
@@ -114,7 +117,8 @@ public class VideoResource {
             String modifiedContent = sbStr.toString().replace("\\", "");
             modifiedContent.substring(0, modifiedContent.length() - 1);
             StringBuilder sb = new StringBuilder(modifiedContent);
-            Files.write(Paths.get(filePath), sb.toString().getBytes(StandardCharsets.UTF_8));
+            System.out.println(sb.toString().substring(0, sb.toString().length() - 1));
+            Files.write(Paths.get(filePath), sb.toString().substring(0, sb.toString().length() - 1).getBytes(StandardCharsets.UTF_8));
             if (created) {
                 System.out.println("File created successfully.");
             } else {
@@ -123,15 +127,6 @@ public class VideoResource {
         } catch (IOException e) {
             System.out.println("Error occurred while creating the file: " + e.getMessage());
         }
-        // log.debug("REST request to save Video : {}", video);
-        /*if (video.getId() != null) {
-            throw new BadRequestAlertException("A new video cannot already have an ID", ENTITY_NAME, "idexists");
-        }*/
-        //Video result = videoService.save(video);
-        /*return ResponseEntity
-            .created(new URI("/api/videos/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-            .body(result);*/
 
         final Process p = Runtime
             .getRuntime()
@@ -142,7 +137,6 @@ public class VideoResource {
                 public void run() {
                     BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
                     String line = null;
-
                     try {
                         while ((line = input.readLine()) != null) System.out.println(line);
                     } catch (IOException e) {
@@ -152,9 +146,8 @@ public class VideoResource {
             }
         )
             .start();
-
         p.waitFor();
-        return "done";
+        return ResponseEntity.ok().body(output);
     }
 
     @PostMapping("/upload")
