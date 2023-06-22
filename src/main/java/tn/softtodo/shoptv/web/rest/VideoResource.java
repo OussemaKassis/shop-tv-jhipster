@@ -1,24 +1,18 @@
 package tn.softtodo.shoptv.web.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
+import java.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.configurationprocessor.json.JSONArray;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.data.domain.Page;
@@ -148,6 +142,35 @@ public class VideoResource {
             .start();
         p.waitFor();
         return ResponseEntity.ok().body(output);
+    }
+
+    @GetMapping("/updateFile")
+    public String updateFile() throws IOException, JSONException {
+        String res = "";
+        String filePath = "C:\\workspace\\Springboot\\shop-tv-jhipster\\test.json";
+
+        String testing =
+            "{\"id\":10,\"name\":\"\",\"duration\":\"00:00:13\",\"preview\":\"/assets/video/video7_m.mp4\",\"category\":\"category\",\"rating\":2.8,\"assets\":[{\"id\":1,\"name\":\"like\",\"type\":\"text\",\"value\":\"\",\"valueUrl\":\"\"},{\"id\":1,\"name\":\"pexels-artem-podrez-4492216.jpg\",\"type\":\"image\",\"value\":\"\",\"valueUrl\":\"\"}]}";
+
+        Path path = Paths.get(filePath);
+        String fileContent = Files.readString(path);
+        fileContent = fileContent.substring(0, fileContent.length() - 1);
+        fileContent = fileContent + "," + testing + "]";
+        System.out.println("File Content:" + fileContent);
+        JSONArray jsonArray = new JSONArray(fileContent);
+
+        /*String output = jsonNew
+            .getJSONObject("actions")
+            .getJSONArray("postrender")
+            .getJSONObject(1) // Assuming you want the output from the second object in the postrender array
+            .getString("output");*/
+
+        System.out.println(jsonArray);
+        JSONObject test = (JSONObject) jsonArray.get(5);
+
+        System.out.println(test);
+
+        return "done";
     }
 
     @PostMapping("/upload")
