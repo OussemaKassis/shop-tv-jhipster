@@ -47,7 +47,7 @@ export class StatisticsComponent implements OnInit {
           radius: '55%',
           center: ['50%', '50%'],
           data: [
-            { value: 335, name: 'Direct' },
+            { value: 320, name: 'Direct' },
             { value: 310, name: 'Email' },
             { value: 274, name: 'Union Ads' },
             { value: 235, name: 'Video Ads' },
@@ -75,7 +75,7 @@ export class StatisticsComponent implements OnInit {
           animationType: 'scale',
           animationEasing: 'elasticOut',
           animationDelay: function () {
-            return Math.random() * 200;
+            return Math.random() * 5000;
           },
         },
       ],
