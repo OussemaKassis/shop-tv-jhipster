@@ -39,6 +39,14 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    if (localStorage.getItem('login') === 'true') {
+      let item1 = document.getElementsByClassName('firstItem')[0] as HTMLElement;
+      item1.style.display = 'none';
+      let item2 = document.getElementsByClassName('secondItem')[0] as HTMLElement;
+      item2.style.display = 'none';
+      let item3 = document.getElementsByClassName('thirdItem')[0] as HTMLElement;
+      item3.style.display = 'none';
+    }
     this.entitiesNavbarItems = EntityNavbarItems;
     this.profileService.getProfileInfo().subscribe(profileInfo => {
       this.inProduction = profileInfo.inProduction;
