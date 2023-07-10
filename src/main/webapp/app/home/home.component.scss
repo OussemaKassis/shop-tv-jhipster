@@ -24,3 +24,57 @@ Main page styles
 
 .card {
 }
+
+.img-stat {
+  transition: 0.2s all;
+
+  &:hover {
+    transform: scale(1.005);
+  }
+}
+
+.img-metrics {
+  width: 788px;
+  position: absolute;
+  right: 50px;
+  top: 97px;
+  transform: rotateZ(8deg);
+  z-index: 998;
+  border-radius: 22px;
+  padding: 5px;
+  background: white;
+  transition: 0.2s all;
+  border: 2px solid #393939;
+  animation: flipBack 0.2s forwards;
+
+  &:hover {
+    animation: flip 0.2s forwards;
+  }
+}
+
+@keyframes flip {
+  0% {
+    transform: rotateZ(8deg);
+  }
+  30% {
+    transform: rotateZ(22deg) translate(-83px, -143px);
+  }
+  100% {
+    z-index: 1000;
+    transform: rotateZ(4deg) scale(1.05) translateY(45px);
+  }
+}
+
+@keyframes flipBack {
+  0% {
+    z-index: 999;
+    transform: rotateZ(4deg) scale(1.05) translateY(45px);
+  }
+  30% {
+    transform: rotateZ(22deg) translate(-83px, -143px);
+  }
+  100% {
+    z-index: 998;
+    transform: rotateZ(8deg);
+  }
+}
